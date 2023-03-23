@@ -64,7 +64,7 @@ const schema = new mongoose.Schema({
         enum: ["mon", "tue", "wed", "thu", "fri", "sat", "sun", ""],
         required: [
           true,
-          " provide non working days in an array format e.g ['sat','sun' or ('' if no non working day)]  ",
+          " provide non working days in an array format e.g ['sat','sun' or '' ('' if no non working day)]  ",
         ],
       },
       workingHours: {

@@ -1,52 +1,32 @@
 const express = require("express");
 const connectDB = require("./database/connectdb");
-// Restaurants is the restaurants database name & schema
-const RestaurantData = require("./models/Restaurants");
 require("dotenv").config();
 const app = express();
+const {
+  getAllRestaurants,
+  addRestaurant,
+  updateRestaurant,
+} = require("./controllers/controllers");
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const port = 8000;
 
-app.get("/", (req, res) => {
-  res.json({
-    name: "de eatery",
-    city: "tamale",
-    location: "nyohi",
-    foods: [
-      { name: "banku", image: "image", price: "$20", availabe: true },
-      { name: "rice", image: "image", price: "$20", availabe: true },
-    ],
-  });
-});
+// get all restaurants endpoint
+app.get("/", getAllRestaurants);
 
 app.get("/v1/restaurants", () => {
   res.send("restaurants page");
 });
+
+// get a single restaurant enpoint
 app.get("/v1/restaurants/:restaurant", (req, res) => {
   const { restaurant } = req.params;
   res.send(`${restaurant}`);
 });
 
-app.post("/createDoc", async (req, res) => {
-  try {
-    const restaurant = await RestaurantData.create(req.body);
-    res.status(201).json({
-      status: "successful added to database",
-      restaurant: restaurant,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error });
-  }
-});
-app.post("/trial", (req, res) => {
-  const restaurant = req.body;
-  console.log(req.body);
-  res.status(201).json({
-    status: "successful added to database",
-    restaurant: restaurant,
-  });
-});
+app.post("/addRestaurant", addRestaurant);
+app.patch("/restaurant/update/:restaurantName", updateRestaurant);
 
 const startServer = async () => {
   try {
