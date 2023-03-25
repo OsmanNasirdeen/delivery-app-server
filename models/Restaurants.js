@@ -22,7 +22,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, "provide restaurant location"],
     trim: true,
-    maxLength: [20, "city name can't be more than 20 characters"],
+    maxLength: [20, "location name can't be more than 20 characters"],
   },
   foods: {
     type: [
