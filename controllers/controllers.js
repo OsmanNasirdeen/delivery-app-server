@@ -48,7 +48,7 @@ const updateRestaurant = async (req, res) => {
     );
     if (!newUpdate) {
       return res.status(201).json({
-        msg: `restaurant name ${restaurantName} is not found in database`,
+        msg: `restaurant named ${restaurantName} is not found in database`,
       });
     }
     res.status(201).json({ updated: newUpdate });
@@ -66,7 +66,7 @@ const deleteRestaurant = async (req, res) => {
     if (!restaurant) {
       return res.status(201).json({
         status: "failed",
-        msg: `restaurant name ${restaurantName} is not found in database`,
+        msg: `restaurant named ${restaurantName} is not found in database`,
       });
     }
     res.status(201).json({
